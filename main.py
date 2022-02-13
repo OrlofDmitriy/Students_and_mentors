@@ -34,7 +34,7 @@ class Student:
         res = f'Имя: {self.name}\nФамилия: {self.surname}\n' \
             f'Средняя оценка за домашние задания: {self._average_rating()}\n' \
             f'Курсы в процессе изучения: {", ".join(self.courses_in_progress)}\n' \
-            f'Завершенные курсы: {", ".join(self.finished_courses)}'
+            f'Завершенные курсы: {", ".join(self.finished_courses)}\n'
         return res
 
     def __lt__(self, other):
@@ -67,7 +67,7 @@ class Lecturer(Mentor):
         return res
 
     def __str__(self):
-        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self._average_rating()}'
+        res = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self._average_rating()}\n'
         return res
 
     def __lt__(self, other):
@@ -91,5 +91,55 @@ class Reviewer(Mentor):
             return 'Ошибка'
 
     def __str__(self):
-        res = f'Имя: {self.name}\nФамилия: {self.surname}'
+        res = f'Имя: {self.name}\nФамилия: {self.surname}\n'
         return res
+
+
+student_1 = Student('Pavel', 'Durov', 'male')
+student_1.courses_in_progress += ['Python']
+student_1.courses_in_progress += ['Java']
+
+student_2 = Student('Elon', 'Mask', 'male')
+student_2.courses_in_progress += ['Python']
+student_2.courses_in_progress += ['Java']
+
+lecturer_1 = Lecturer('Guido', 'van Rossum')
+lecturer_1.courses_attached += ['Python']
+lecturer_1.courses_attached += ['Java']
+
+lecturer_2 = Lecturer('Donald', 'Knuth')
+lecturer_2.courses_attached += ['Python']
+lecturer_2.courses_attached += ['Java']
+
+reviewer_1 = Reviewer('Bill', 'Gates')
+reviewer_1.courses_attached += ['Python']
+
+reviewer_2 = Reviewer('Steve', 'Jobs')
+reviewer_2.courses_attached += ['Python']
+
+student_1.rate_lect(lecturer_1, 'Python', 10)
+student_1.rate_lect(lecturer_2, 'Python', 10)
+student_1.rate_lect(lecturer_1, 'Java', 7)
+student_1.rate_lect(lecturer_2, 'Java', 8)
+
+student_2.rate_lect(lecturer_1, 'Python', 9)
+student_2.rate_lect(lecturer_2, 'Python', 8)
+student_2.rate_lect(lecturer_1, 'Java', 6)
+student_2.rate_lect(lecturer_2, 'Java', 7)
+
+reviewer_1.rate_hw(student_1, 'Python', 9)
+reviewer_1.rate_hw(student_2, 'Python', 5)
+reviewer_1.rate_hw(student_1, 'Java', 8)
+reviewer_1.rate_hw(student_2, 'Java', 9)
+
+reviewer_2.rate_hw(student_1, 'Python', 8)
+reviewer_2.rate_hw(student_2, 'Python', 4)
+reviewer_2.rate_hw(student_1, 'Java', 6)
+reviewer_2.rate_hw(student_2, 'Java', 7)
+
+print(lecturer_1)
+print(lecturer_2)
+print(student_1)
+print(student_2)
+print(lecturer_1 > lecturer_2)
+print(student_1 > student_2)
