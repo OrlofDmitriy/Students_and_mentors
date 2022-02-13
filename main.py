@@ -110,6 +110,21 @@ def average_student_hw_grade(students_list, course):
     return res
 
 
+def average_lecturer_lect_grade(lecturer_list, course):
+    grades = []
+    count = 0
+    for lecturer in lecturer_list:
+        for key, values in lecturer.grades.items():
+            if key == course:
+                for value in values:
+                    grades.append(value)
+                    count += 1
+
+    res = round(sum(grades) / count, 1)
+    print(f"Средняя оценка за лекции по курсу {course}: {res}")
+    return res
+
+
 student_1 = Student('Pavel', 'Durov', 'male')
 student_1.courses_in_progress += ['Python']
 student_1.courses_in_progress += ['Java']
@@ -163,3 +178,6 @@ print(student_1 > student_2)
 
 stude_list = [student_1, student_2]
 average_student_hw_grade(stude_list, 'Python')
+
+lect_list = [lecturer_1, lecturer_2]
+average_lecturer_lect_grade(lect_list, 'Java')
