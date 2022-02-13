@@ -95,6 +95,21 @@ class Reviewer(Mentor):
         return res
 
 
+def average_student_hw_grade(students_list, course):
+    grades = []
+    count = 0
+    for student in students_list:
+        for key, values in student.grades.items():
+            if key == course:
+                for value in values:
+                    grades.append(value)
+                    count += 1
+
+    res = round(sum(grades) / count, 1)
+    print(f"Средняя оценка за домашние задания по курсу {course}: {res}")
+    return res
+
+
 student_1 = Student('Pavel', 'Durov', 'male')
 student_1.courses_in_progress += ['Python']
 student_1.courses_in_progress += ['Java']
@@ -113,9 +128,11 @@ lecturer_2.courses_attached += ['Java']
 
 reviewer_1 = Reviewer('Bill', 'Gates')
 reviewer_1.courses_attached += ['Python']
+reviewer_1.courses_attached += ['Java']
 
 reviewer_2 = Reviewer('Steve', 'Jobs')
 reviewer_2.courses_attached += ['Python']
+reviewer_2.courses_attached += ['Java']
 
 student_1.rate_lect(lecturer_1, 'Python', 10)
 student_1.rate_lect(lecturer_2, 'Python', 10)
@@ -143,3 +160,6 @@ print(student_1)
 print(student_2)
 print(lecturer_1 > lecturer_2)
 print(student_1 > student_2)
+
+stude_list = [student_1, student_2]
+average_student_hw_grade(stude_list, 'Python')
